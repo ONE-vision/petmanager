@@ -1,20 +1,33 @@
+import logging
+logging.basicConfig(level=logging.INFO)
+
+
+logger=logging.getLogger(__name__)
+logger2=logging.getLogger('whatever')
+
 from modules.datamodel import Animal, Result
 from typing import List, Tuple
 
 
+
 class PetManager:
     def __init__(self) -> None:
+        logger.debug("petmanager init")
         self.zoo = []
 
     def _validate(self, animal: Animal) -> bool:
+        logger.debug("in validate")
         """check if we can accept this animal.
         Checks:
             1. species is "dog" or "cat"
             2. id is unique
         """
         existing_ids = set(map(lambda x: x.id, self.zoo))
+        logger.debug(f"validate existing_ids: {existing_ids}")
         if animal.id in existing_ids:
+            logger.warning("Duplicate id")
             return False
+        logger.info(f"Animal accepted: {animal}")
         return True
 
     def add_animal(self, animal: Animal) -> bool:

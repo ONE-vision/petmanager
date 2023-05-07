@@ -1,13 +1,18 @@
-from petmanager import PetManager 
+import logging
+logging.basicConfig(level=logging.DEBUG)
+logging.getLogger('urllib3').setLevel(logging.WARNING)
+import requests 
 
-class Commands:
-    list=1
-    
-mgr=PetManager()    
-c=int(input("command: "))
-if c == Commands.list:
-    print(mgr.list_animals())
-    
-    
-    
-    
+URL='http://localhost:8888/api/v1'
+
+
+from modules.datamodel import Animal 
+
+a=Animal(1,True,"asdf","asdf")
+
+p=requests.post(URL+"/add",json=a.__dict__)
+logging.info(p.text)
+
+l=requests.get(URL+"/list")
+res=l.json()
+logging.debug(f"get: {res}")
