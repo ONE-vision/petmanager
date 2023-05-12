@@ -28,6 +28,7 @@ class PetManager:
             logger.warning("Duplicate id")
             return False
         if animal.species not in ['cat', 'dog']:
+            logger.warning("Bad species!")
             return False
         logger.info(f"Animal accepted: {animal}")
         return True
@@ -54,6 +55,7 @@ class PetManager:
         # return result
 
     def get_animal(self, id: int = None, name: str = None) -> Animal:
+        logger.debug("Get animal")
         if id != None:
             result=list(filter(lambda x: x.id == id, self.zoo))
             
@@ -62,12 +64,6 @@ class PetManager:
             result=list(filter(lambda x: x.name == name, self.zoo))
 
             return(list[0])
-
-        """for i in self.zoo:   
-            if i == id:
-                print("YES")
-            else:
-                print("NO")"""
         
         """
         Return requested animal and search result.
