@@ -27,6 +27,8 @@ class PetManager:
         if animal.id in existing_ids:
             logger.warning("Duplicate id")
             return False
+        if animal.species not in ['cat', 'dog']:
+            return False
         logger.info(f"Animal accepted: {animal}")
         return True
 
@@ -59,7 +61,7 @@ class PetManager:
         if name != None:
             result=list(filter(lambda x: x.name == name, self.zoo))
 
-            return result
+            return(list[0])
 
         """for i in self.zoo:   
             if i == id:
