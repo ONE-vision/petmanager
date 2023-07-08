@@ -14,7 +14,9 @@ async def list():
 async def create(animal: Animal):
     return app.mgr.add_animal(animal)
 
-# To run:
+    #TESTTESTTEST
+
+#To run:
 #pip install uvicorn
 #uvicorn server-fastapi:app
 
