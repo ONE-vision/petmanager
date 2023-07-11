@@ -14,9 +14,9 @@ async def list():
 async def create(animal: Animal):
     return app.mgr.add_animal(animal)
 
-@app.delete('/api/v1/delete')
-async def delete(id, name):
-    return app.mgr.delete_animal(bool)
+@app.delete('/api/v1/delete/{id}')
+async def delete(id: int):
+    return app.mgr.delete_animal(id)
 
     #TESTTESTTEST
 
