@@ -1,5 +1,7 @@
+import os
 import logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO)logging
+.basicConfig(level=loglevel)
 
 
 logger=logging.getLogger(__name__)
@@ -7,7 +9,7 @@ logger=logging.getLogger(__name__)
 from modules.datamodel import Animal
 from typing import List, Tuple
 
-SERVER='http://localhost:....'
+SERVER='http://localhost:8000'
 
 class PetManagerClient:
     def __init__(self, server) -> None:
@@ -19,15 +21,15 @@ class PetManagerClient:
         r=requests.post(server+'/add', json=animal)
         return r.json()
         
-        
-
     def list_animals(self, species: str = None, gender: bool = None) -> List[Animal]:
-        
+        r=requests.post(server+'/list', json=animal)
+        return r.json()
 
-    def get_animal(self, id: int = None, name: str = None) -> Animal:
-
-    def delete_animal(self, deleted: int) -> bool:
-
+    def del_animal(self, id: int = None, name: str = None) -> Animal:
+        r=requests.post(server+'/del', json=animal)
+        return r.json()
+    
+    
 class Commands:
     add = 1
     search = 2
