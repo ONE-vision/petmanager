@@ -19,6 +19,6 @@ async def create(animal: Animal) -> bool:
 async def delete(id: int) -> bool:
     return app.mgr.delete_animal(id)
 
-@app.search('/api/v1/delete/{id}')
+@app.search('/api/v1/search/{id}')
 async def search(id: int) -> bool:
     return app.mgr.get_animal(id)
