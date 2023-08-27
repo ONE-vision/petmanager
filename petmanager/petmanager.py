@@ -5,7 +5,7 @@ logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger(__name__)
 logger2=logging.getLogger('whatever')
 
-from modules.datamodel import Animal, Result
+from .datamodel import Animal, Result
 from typing import List, Tuple
 
 

@@ -1,6 +1,7 @@
+import uvicorn
 from fastapi import FastAPI
-from petmanager import PetManager
-from modules.datamodel import Animal
+from .petmanager import PetManager
+from .datamodel import Animal
 from typing import List
 
 
@@ -22,3 +23,9 @@ async def delete(id: int) -> bool:
 @app.get('/api/v1/search/{id}')
 async def get(id: int) -> bool:
     return app.mgr.get_animal(id)
+
+def main():
+    uvicorn.run(app=app)
+
+if __name__ == "__main__":
+    main()
