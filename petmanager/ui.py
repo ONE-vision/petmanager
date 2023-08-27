@@ -6,7 +6,7 @@ import requests
 URL='http://localhost:8888/api/v1'
 
 
-from modules.datamodel import Animal 
+from petmanager.datamodel import Animal 
 
 a=Animal(1,True,"asdf","asdf")
 

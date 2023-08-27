@@ -1,12 +1,11 @@
 import os
 import logging
-logging.basicConfig(level=logging.INFO)logging
-.basicConfig(level=loglevel)
+logging.basicConfig(level=os.environ.get('LOGLEVEL', 'INFO'))
 
 
 logger=logging.getLogger(__name__)
 
-from modules.datamodel import Animal
+from petmanager.datamodel import Animal
 from typing import List, Tuple
 
 SERVER='http://localhost:8000'
