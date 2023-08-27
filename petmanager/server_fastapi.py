@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from .petmanager import PetManager
 from .datamodel import Animal
 from typing import List
+import os
 
 
 app = FastAPI()
@@ -25,7 +26,7 @@ async def get(id: int) -> bool:
     return app.mgr.get_animal(id)
 
 def main():
-    uvicorn.run(app=app)
+    uvicorn.run(app=app, port=int(os.getenv('HTTP_PORT', 8000 )), host="0.0.0.0")
 
 if __name__ == "__main__":
     main()
