@@ -17,3 +17,4 @@ classifiers = [
 ]
 [project.scripts]
 server = "petmanager.server_fastapi:main"
+client = "petmanager.petmanagerclient:main"

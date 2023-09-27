@@ -8,7 +8,7 @@ logger=logging.getLogger(__name__)
 from petmanager.datamodel import Animal
 from typing import List, Tuple
 
-SERVER='http://localhost:8000'
+SERVER=os.getenv('SERVER','http://localhost:8000')
 
 class PetManagerClient:
     def __init__(self, server) -> None:
@@ -36,9 +36,9 @@ class Commands:
     exit = 5
 
 
-if __name__ == "__main__":
+def main():
     print("Starting Pet Manager")
-    mgr = PetManagerClient()
+    mgr = PetManagerClient(SERVER)
 
     w = """Welcome to Pet manager! Please, choose command:
     1 - add animal;
@@ -99,3 +99,6 @@ if __name__ == "__main__":
             name_to_search=str(input("Input Name: "))
             se=mgr.get_animal(id_to_search, name_to_search)
             print(se)
+
+if __name__=="__main__":
+    main()
