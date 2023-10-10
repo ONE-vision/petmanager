@@ -26,6 +26,10 @@ class PetManagerClient:
     def del_animal(self, id: int = None) -> bool:
         r=requests.post(server+'/del', json=animal)
         return r.json()
+    
+    def get_animal(self, id: int = None) -> bool:
+        r=requests.post(server+'/del', json=animal)
+        return r.json()
 
 
 class Commands:
