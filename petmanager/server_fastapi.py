@@ -22,7 +22,7 @@ async def delete(id: int) -> bool:
     return app.mgr.delete_animal(id)
 
 @app.get('/api/v1/search/{id}')
-async def get(id: int) -> bool:
+async def get(id: int) -> Animal:
     return app.mgr.get_animal(id)
 
 def main():

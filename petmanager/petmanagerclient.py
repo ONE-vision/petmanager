@@ -1,5 +1,6 @@
 import os
 import logging
+import requests
 logging.basicConfig(level=os.environ.get('LOGLEVEL', 'INFO'))
 
 
@@ -16,19 +17,19 @@ class PetManagerClient:
         self.server=server
 
     def add_animal(self, animal: Animal) -> bool:
-        r=requests.post(server+'/add', json=animal)
+        r=requests.post(self.server+'/add', json=animal)
         return r.json()
 
     def list_animals(self, species: str = None, gender: bool = None) -> List[Animal]:
-        r=requests.post(server+'/list', json=animal)
+        r=requests.get(self.server+'/list')
         return r.json()
 
     def del_animal(self, id: int = None) -> bool:
-        r=requests.post(server+'/del', json=animal)
+        r=requests.delete(self.server+f'/del/{id}')
         return r.json()
     
-    def get_animal(self, id: int = None) -> bool:
-        r=requests.post(server+'/del', json=animal)
+    def get_animal(self, id: int = None) -> Animal:
+        r=requests.post(self.server+f'/get')
         return r.json()
 
 
@@ -75,15 +76,12 @@ def main():
                 print(f"Error: {result.message}")
 
         if command == Commands.list:
-            # al=mgr.list_animals(species != None) - Trying to insert values to method_list, but it doesn't work now.
-            g=input("Gender (M/F, empty for all)")# .strip()
-            # g M, F, ""
-            #True = M, False = F, None = ""
-            #gm= ....... 
+
+            '''g=input("Gender (M/F, empty for all)")    
             print(f"DEBUG: gm={gm}")
             sp=input("Species (empty for all): ")
             sp=sp if sp != "" else None
-            print(f"DEBUG: sp={sp}")
+            print(f"DEBUG: sp={sp}")'''
         
         
         al=mgr.list_animals(gender=gm, species=sp)
