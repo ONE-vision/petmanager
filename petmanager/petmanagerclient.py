@@ -84,7 +84,8 @@ def main():
             print(f"DEBUG: sp={sp}")'''
         
         
-        al=mgr.list_animals(gender=gm, species=sp)
+        # al=mgr.list_animals(gender=gm, species=sp)
+        al=mgr.list_animals
         print(al)
         if command == Commands.exit:
             print("Goodbye!")
