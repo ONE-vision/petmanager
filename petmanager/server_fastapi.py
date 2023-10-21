@@ -1,3 +1,4 @@
+import logging
 import uvicorn
 from fastapi import FastAPI
 from .petmanager import PetManager
@@ -5,9 +6,19 @@ from .datamodel import Animal
 from typing import List
 import os
 
+LOGLEVEL=os.environ.get('LOGLEVEL','DEBUG')
+logging.basicConfig(level=LOGLEVEL)
+logger=logging.getLogger(__name__)
 
 app = FastAPI()
-app.mgr=PetManager()
+if os.environ.get('REDIS_HOST', None):
+    l.info("Using Redis")
+    from .petmanager_redis import PetManager_Redis
+    app.mgr=PetManager_Redis()
+else:
+    logger.info("REDIS_HOST not set, using in-memory Petmanager")
+    from .petmanager import PetManager
+    app.mgr=PetManager()
 
 @app.get("/api/v1/list")
 async def list() -> List[Animal]:
