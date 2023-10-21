@@ -1,7 +1,7 @@
 import pytest
 
-from petmanager import PetManager
-from datamodel import Animal
+from .petmanager import PetManager
+from .datamodel import Animal
 
 
 
