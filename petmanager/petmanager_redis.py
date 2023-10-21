@@ -2,6 +2,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 import os
 import redis
+import json
 
 logger=logging.getLogger(__name__)
 
@@ -34,7 +35,7 @@ class PetManager_Redis:
 
     def add_animal(self, animal: Animal) -> bool:
         if  self._validate(animal):
-            self.r.set(animal.id, animal)
+            self.r.set(animal.id, json.dumps(animal.__dict__))
             return True
         return False
 
@@ -45,10 +46,10 @@ class PetManager_Redis:
         """
         result=[]
         for k in self.r.keys():
-            a=self.r.get(k)
+            a=Animal(**json.loads(self.r.get(k).decode()))
             if not (a.species==species or species==None):
                 continue
-            if not (a.gender==gender or gender == None):
+            if not (a.gender_male==gender or gender == None):
                 continue
             result.append(a)
         return result
@@ -68,6 +69,7 @@ class PetManager_Redis:
             r=self.r.get(id)
             if not r:
                return None
+            r=Animal(**json.loads(r).decode())
             if name and r.name!=name:
                 return None
             return r
@@ -76,7 +78,7 @@ class PetManager_Redis:
         if not name:
             raise RuntimeError("get_animal should have id or name")
         for i in self.r.keys():
-            a=self.r.get(i)
+            a=Animal(**json.loads(self.r.get(i).decode()))
             if a.name == name: 
                 return a
 

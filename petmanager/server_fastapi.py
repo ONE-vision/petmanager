@@ -12,7 +12,7 @@ logger=logging.getLogger(__name__)
 
 app = FastAPI()
 if os.environ.get('REDIS_HOST', None):
-    l.info("Using Redis")
+    logger.info("Using Redis")
     from .petmanager_redis import PetManager_Redis
     app.mgr=PetManager_Redis()
 else:
